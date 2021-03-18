@@ -1,0 +1,27 @@
+#
+# {{ ansible_managed }}
+#
+
+##################################################################################
+# nice colors in ls
+#
+alias ls &> /dev/null && unalias ls
+export LS_OPTIONS="-N --color=auto -T 0"
+
+##################################################################################
+# Aliases
+#
+alias c='clear'
+alias ll='ls -lh -N --color=auto -T 0'
+alias l1='ls -1 -N --color=auto -T 0'
+alias la='ls -lah -N --color=auto -T 0'
+# display colors, see http://unix.stackexchange.com/questions/19317/ddg#19320
+alias less='less -r'
+
+#############################################################################################################
+# RSYNC
+#
+alias RSYNC_avhHEAX='rsync -avhHEAX'
+alias RSYNC_avhHEAX_SUDO='sudo rsync -avhHEAX'
+alias rsync_vr_sizeonly='rsync -vr --size-only'
+alias rsync_vr_sizeonly_SUDO='sudo rsync -vr --size-only'
