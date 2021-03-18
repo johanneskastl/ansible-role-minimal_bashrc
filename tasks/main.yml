@@ -1,0 +1,21 @@
+---
+# minimal_bashrc/tasks/main.yml
+
+- name: 'Create .bashrc for root'
+  template:
+    src: 'bashrc.j2'
+    dest: '/root/.bashrc'
+    owner: 'root'
+    group: 'root'
+    mode: '0644'
+
+- name: 'Create .bashrc for other users (if any are supplied)'
+  template:
+    src: 'bashrc.j2'
+    dest: "/home/{{ item }}/.bashrc"
+    owner: "{{ item }}"
+    group: "{{ item }}"
+    mode: '0644'
+  with_items:
+    - "{{ additional_users }}"
+  when: 'additional_users is defined'
