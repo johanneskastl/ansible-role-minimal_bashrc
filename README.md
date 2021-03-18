@@ -13,7 +13,7 @@ None.
 Role Variables
 --------------
 
-None.
+- `additional_users`: (optional) Other users except the root user, that should get a ~/.bashrc. A good idea would be to create one for the `ansible_user`... 
 
 Dependencies
 ------------
