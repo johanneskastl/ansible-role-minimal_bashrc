@@ -9,6 +9,23 @@ alias ls &> /dev/null && unalias ls
 export LS_OPTIONS="-N --color=auto -T 0"
 
 ##################################################################################
+# increase size of bash history
+#
+export HISTSIZE=100000
+export HISTFILESIZE=100000
+
+##################################################################################
+# no duplicate entries in bash history
+#
+export HISTCONTROL=ignoreboth:erasedups
+
+##################################################################################
+# append to bash history
+#
+shopt -s histappend
+export PROMPT_COMMAND="history -a"
+
+##################################################################################
 # Aliases
 #
 alias c='clear'
