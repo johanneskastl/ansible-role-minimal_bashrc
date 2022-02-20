@@ -13,7 +13,7 @@ None.
 Role Variables
 --------------
 
-- `additional_users`: (optional) Other users except the root user, that should get a ~/.bashrc. A good idea would be to create one for the `ansible_user`... 
+- `additional_users`: (optional) Other users except the root user, that should get a ~/.bashrc. A good idea would be to create one for the `ansible_user`...
 
 Dependencies
 ------------
@@ -25,7 +25,12 @@ Example Playbook
 
     - hosts: servers
       roles:
-         - { role: 'johanneskastl.minimal_bashrc' }
+        - role: 'johanneskastl.minimal_bashrc'
+          vars:
+            additional_users:
+              - "{{ ansible_user }}"
+              - 'alice'
+              - 'bob'
 
 License
 -------
