@@ -1,5 +1,6 @@
 galaxy_info:
   role_name: 'minimal_bashrc'
+  namespace: 'johanneskastl'
   author: 'Johannes Kastl'
   description: 'Create a minimal .bashrc'
   company: 'B1 Systems GmbH'
