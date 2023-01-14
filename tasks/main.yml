@@ -2,7 +2,7 @@
 # minimal_bashrc/tasks/main.yml
 
 - name: 'Set primary group to users on SUSE/openSUSE'
-  set_fact:
+  ansible.builtin.set_fact:
     primary_group_name: 'users'
   when: '
     ansible_distribution == "SLES" or
@@ -12,7 +12,7 @@
     '
 
 - name: 'Create .bashrc for root'
-  template:
+  ansible.builtin.template:
     src: 'bashrc.j2'
     dest: '/root/.bashrc'
     owner: 'root'
@@ -20,7 +20,7 @@
     mode: '0644'
 
 - name: 'Create .bashrc for other users (if any are supplied)'
-  template:
+  ansible.builtin.template:
     src: 'bashrc.j2'
     dest: "/home/{{ item }}/.bashrc"
     owner: "{{ item }}"
