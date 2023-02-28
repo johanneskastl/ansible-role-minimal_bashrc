@@ -1,0 +1,86 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: podman
+platforms:
+  - name: centos7
+    image: docker.io/pycontribs/centos:7
+    tmpfs:
+      - /run
+      - /tmp
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    capabilities:
+      - SYS_ADMIN
+    command: "/lib/systemd/systemd"
+    pre_build_image: true
+  - name: rhel8
+    image: registry.access.redhat.com/ubi8/ubi-init
+    tmpfs:
+      - /run
+      - /tmp
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    capabilities:
+      - SYS_ADMIN
+    command: "/usr/sbin/init"
+    pre_build_image: true
+  - name: rhel9
+    image: registry.access.redhat.com/ubi9/ubi-init
+    tmpfs:
+      - /run
+      - /tmp
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    capabilities:
+      - SYS_ADMIN
+    command: "/usr/sbin/init"
+    pre_build_image: true
+  - name: opensuse_leap_15_4
+    image: registry.opensuse.org/home/ojkastl_buildservice/opensuse_containers_with_systemd_and_python/leap_15_4_containers/leap-15.4-systemd-python:latest
+    tmpfs:
+      - /run
+      - /tmp
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    capabilities:
+      - SYS_ADMIN
+    command: "/usr/lib/systemd/systemd"
+    pre_build_image: true
+  - name: opensuse_leap_15_5
+    image: registry.opensuse.org/home/ojkastl_buildservice/opensuse_containers_with_systemd_and_python/leap_15_5_containers/leap-15.5-systemd-python:latest
+    tmpfs:
+      - /run
+      - /tmp
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    capabilities:
+      - SYS_ADMIN
+    command: "/usr/lib/systemd/systemd"
+    pre_build_image: true
+  - name: opensuse_tumbleweed
+    image: registry.opensuse.org/home/ojkastl_buildservice/opensuse_containers_with_systemd_and_python/tumbleweed_containers/tumbleweed-systemd-python:latest
+    tmpfs:
+      - /run
+      - /tmp
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    capabilities:
+      - SYS_ADMIN
+    command: "/usr/lib/systemd/systemd"
+    pre_build_image: true
+provisioner:
+  name: ansible
+  config_options:
+    defaults:
+      interpreter_python: auto_silent
+      callbacks_enabled: profile_tasks, timer, yaml
+    ssh_connection:
+      pipelining: false
+verifier:
+  name: ansible
+lint: |
+  set -e
+  yamllint .
+  ansible-lint .
