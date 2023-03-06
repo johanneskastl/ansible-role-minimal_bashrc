@@ -19,9 +19,9 @@ platforms:
       - SYS_ADMIN
     command: "/lib/systemd/systemd"
     pre_build_image: true
-  ####################################################
-  - name: rhel8
-    image: registry.access.redhat.com/ubi8/ubi-init
+  #################################################
+  - name: almalinux8
+    image: quay.io/almalinuxorg/8-init
     tmpfs:
       - /run
       - /tmp
@@ -32,8 +32,8 @@ platforms:
     command: "/usr/sbin/init"
     pre_build_image: true
   ####################################################
-  - name: rhel9
-    image: registry.access.redhat.com/ubi9/ubi-init
+  - name: almalinux9
+    image: quay.io/almalinuxorg/9-init
     tmpfs:
       - /run
       - /tmp
