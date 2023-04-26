@@ -1,0 +1,4 @@
+---
+# minimal_bashrc/defaults/main.yml
+
+bashrc_for_root: true
