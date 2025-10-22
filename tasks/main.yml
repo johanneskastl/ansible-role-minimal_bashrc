@@ -11,12 +11,22 @@
     ansible_distribution == "openSUSE Tumbleweed"
     '
 
+- name: 'Set root_group to wheel on FreeBSD'
+  ansible.builtin.set_fact:
+    root_group: 'wheel'
+  when:
+    - 'ansible_os_family == "FreeBSD"'
+
+#
+#
+#
+
 - name: 'Create .bashrc for root'
   ansible.builtin.template:
     src: 'bashrc.j2'
     dest: '/root/.bashrc'
     owner: 'root'
-    group: 'root'
+    group: "{{ root_group | default('root') }}"
     mode: '0644'
   when:
     - bashrc_for_root | bool
