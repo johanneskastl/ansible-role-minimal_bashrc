@@ -1,0 +1,22 @@
+---
+# This is an example playbook to execute Ansible tests.
+
+- name: Verify
+  hosts: all
+  gather_facts: true
+  tasks:
+
+  - name: Run stat on /root/.bashrc
+    ansible.builtin.stat:
+      path: /root/.bashrc
+      checksum_algorithm: 'sha256'
+    register: root_bashrc
+
+  - name: Verify the attributes for /root/.bashrc are correct
+    ansible.builtin.assert:
+      that:
+        - 'root_bashrc.stat.exists'
+        - 'root_bashrc.stat.mode == "0644"'
+        - 'root_bashrc.stat.pw_name == "root"'
+        - 'root_bashrc.stat.gr_name == "root"'
+        - 'root_bashrc.stat.checksum == "1c479fe4b4f05d0467b284c2b77bd3f4b19eaeb0a9f918167643a738530c6a57"'
